@@ -21,17 +21,19 @@ app.get('/', async (req, res)=> {
     res.render("index.ejs");
 });
 
-// GET /fruits
-app.get("/fruits", (req, res) => {
-    res.send("Welcome to the index page!");
+
+  // GET /fruits
+app.get("/fruits", async (req, res) => {
+    const allFruits = await Fruit.find();
+    // console.log(allFruits)
+    res.render('fruits/index.ejs', { fruits: allFruits });
   });
-  
+
 
 app.get('/fruits/new', (req, res) => {
     res.render('fruits/new.ejs');
 })
 
-// server.js
 
 // POST /fruits
 app.post("/fruits", async (req, res) => {
